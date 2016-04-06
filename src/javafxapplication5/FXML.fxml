@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="1080.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxapplication5.FXMLController">
+    <stylesheets>
+        <URL value="@fxml.css" />
+    </stylesheets>
+    <children>
+        <ImageView fx:id="backGround" fitHeight="1080.0" fitWidth="1100.0" layoutY="-86.0">
+         <image>
+            <Image url="@../../../../mini%20project/UI%20DESIGN/Fullsize.png" />
+         </image>
+         <effect>
+            <GaussianBlur radius="29.0" />
+         </effect>
+      </ImageView>
+      <Pane layoutX="255.0" opacity="0.43" prefHeight="748.0" prefWidth="1285.0" style="-fx-background-color: grey;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <Pane prefHeight="648.0" prefWidth="1083.0">
+         <children>
+            <ImageView fx:id="albumArt" fitHeight="304.0" fitWidth="304.0" layoutX="78.0" layoutY="78.0">
+               <image>
+                  <Image url="@../../../../mini%20project/UI%20DESIGN/Fullsize.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="42.0" fitWidth="34.0" layoutX="105.0" layoutY="564.0" onMouseClicked="#onPlayPressed">
+               <image>
+                  <Image url="@icons/play.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="38.0" fitWidth="38.0" layoutX="166.0" layoutY="569.0">
+               <image>
+                  <Image url="@icons/ff.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="38.0" fitWidth="38.0" layoutX="40.0" layoutY="568.0" rotate="180.0">
+               <image>
+                  <Image url="@icons/ff.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="86.0" layoutY="389.0" text="Label" />
+            <Slider fx:id="volSlider" layoutX="874.0" layoutY="577.0" />
+            <ImageView fitHeight="28.0" fitWidth="19.0" layoutX="850.0" layoutY="571.0">
+               <image>
+                  <Image url="@icons/vol%20down.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="1024.0" layoutY="568.0">
+               <image>
+                  <Image url="@icons/vol+.png" />
+               </image>
+            </ImageView>
+            <ProgressBar fx:id="pBar" layoutX="236.0" layoutY="587.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="3.0" prefWidth="584.0" progress="0.0" />
+            <ImageView layoutX="1035.0" layoutY="13.0">
+               <image>
+                  <Image url="@icons/three.png" />
+               </image>
+            </ImageView>
+            <ListView layoutX="526.0" layoutY="65.0" opacity="0.0" prefHeight="410.0" prefWidth="550.0" />
+         </children>
+      </Pane>
+    </children>
+</AnchorPane>
