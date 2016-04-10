@@ -18,8 +18,14 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.embed.swing.SwingFXUtils;
+import javafx.event.Event;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.stage.Stage;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.Slider;
@@ -50,47 +56,97 @@ public class FXMLController implements Initializable {
     private ProgressBar pBar;
     @FXML
     private ImageView play;
-    
-    TimbrePlayer P= new TimbrePlayer();
-    Boolean PlayOrPause =false;
+
+    TimbrePlayer P = new TimbrePlayer();
+    Boolean PlayOrPause = false;
+    Stage stage;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }
-public void onPlayPressed(){
+
+    @FXML
+    public void onPlayPressed(Event e) {
         try {
-            String song="sample.mp3";
-            Mp3File  mpf2 =new Mp3File(song);
-            if(mpf2.hasId3v2Tag()){
+            String song = "sample.mp3";
+            Mp3File mpf2 = new Mp3File(song);
+            if (mpf2.hasId3v2Tag()) {
                 ID3v2 id3v2tag = mpf2.getId3v2Tag();
-                    byte[] imageData = id3v2tag.getAlbumImage();
-                    if (imageData!=null){
-                        System.out.println("debug:: imageData is not null");
-                        BufferedImage img = ImageIO.read(new ByteArrayInputStream(imageData));
-                        Image image = SwingFXUtils.toFXImage(img, null);
-                        albumArt.setImage(image);
-                        backGround.setImage(image);
-                    }
-                    }
-            if(PlayOrPause==false)
-            {P.play(song);
-            PlayOrPause=true;
+                byte[] imageData = id3v2tag.getAlbumImage();
+                if (imageData != null) {
+                    System.out.println("debug:: imageData is not null");
+                    BufferedImage img = ImageIO.read(new ByteArrayInputStream(imageData));
+                    Image image = SwingFXUtils.toFXImage(img, null);
+                    albumArt.setImage(image);
+                    backGround.setImage(image);
+                }
             }
-            else {
+            if (PlayOrPause == false) {
+                P.play(song);
+                PlayOrPause = true;
+            } else {
                 P.pause();
-                PlayOrPause=false;
-            }      } catch (IOException ex) {
+                PlayOrPause = false;
+            }
+        } catch (IOException ex) {
             Logger.getLogger(FXMLController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (UnsupportedTagException ex) {
             Logger.getLogger(FXMLController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (InvalidDataException ex) {
             Logger.getLogger(FXMLController.class.getName()).log(Level.SEVERE, null, ex);
         }
-}
-public void ss(){
-    System.out.println("what the fuck");
-}
+    }
 
+    public void ss() {
+        System.out.println("what the fuck");
+    }
 
+    @FXML
+    public void switchToMedia(Event event) throws IOException {
+        try{
+             Parent root = FXMLLoader.load(getClass().getResource("MediaLib.fxml"));
+
+        Scene scene = new Scene(root);
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
+       
+    }
     
+    @FXML
+    public void switchToNowPlaying(Event event) throws IOException {
+        try{
+             Parent root = FXMLLoader.load(getClass().getResource("FXML.fxml"));
+
+        Scene scene = new Scene(root);
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
+       
+    }
+
+    @FXML
+    public void switchToPlaylist(Event event) throws IOException {
+        try{
+             Parent root = FXMLLoader.load(getClass().getResource("playlist.fxml"));
+
+        Scene scene = new Scene(root);
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
+       
+    }
 }

@@ -22,7 +22,7 @@ import javafx.stage.Stage;
  *
  * @author Ameen
  */
-public class PlaylistController implements Initializable {
+public class MediaLibController implements Initializable {
 
     /**
      * Initializes the controller class.
@@ -32,6 +32,7 @@ public class PlaylistController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
+    
     @FXML
     public void switchToMedia(Event event) throws IOException {
         try{

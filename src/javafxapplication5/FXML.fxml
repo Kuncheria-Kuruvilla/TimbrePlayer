@@ -24,7 +24,7 @@
             <GaussianBlur radius="29.0" />
          </effect>
       </ImageView>
-      <Pane layoutX="255.0" opacity="0.43" prefHeight="748.0" prefWidth="1285.0" style="-fx-background-color: grey;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <Pane opacity="0.29" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: black;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
       <Pane prefHeight="648.0" prefWidth="1083.0">
          <children>
             <ImageView fx:id="albumArt" fitHeight="304.0" fitWidth="304.0" layoutX="78.0" layoutY="78.0">
@@ -37,12 +37,12 @@
                   <Image url="@icons/play.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="38.0" fitWidth="38.0" layoutX="166.0" layoutY="569.0">
+            <ImageView fitHeight="28.0" fitWidth="28.0" layoutX="166.0" layoutY="572.0">
                <image>
                   <Image url="@icons/ff.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="38.0" fitWidth="38.0" layoutX="40.0" layoutY="568.0" rotate="180.0">
+            <ImageView fitHeight="28.0" fitWidth="28.0" layoutX="40.0" layoutY="571.0" rotate="180.0">
                <image>
                   <Image url="@icons/ff.png" />
                </image>
@@ -66,6 +66,13 @@
                </image>
             </ImageView>
             <ListView layoutX="526.0" layoutY="65.0" opacity="0.0" prefHeight="410.0" prefWidth="550.0" />
+            <Pane layoutX="707.0" layoutY="3.0" opacity="0.43" prefHeight="190.0" prefWidth="369.0" style="-fx-background-color: grey;">
+               <children>
+                  <Label layoutX="1.0" layoutY="-1.0" onMouseClicked="#switchToMedia" prefHeight="45.0" prefWidth="292.0" text="media" />
+                  <Label layoutX="2.0" layoutY="50.0" onMouseClicked="#switchToNowPlaying" prefHeight="45.0" prefWidth="292.0" text="Now Playing" />
+                  <Label layoutX="1.0" layoutY="101.0" onMouseClicked="#switchToPlaylist" prefHeight="45.0" prefWidth="292.0" text="Playlist" />
+               </children>
+            </Pane>
          </children>
       </Pane>
     </children>

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.effect.*?>
 <?import javafx.scene.image.*?>
 <?import java.lang.*?>
 <?import java.net.*?>
@@ -13,7 +14,49 @@
         <URL value="@playlist.css" />
     </stylesheets>
    <children>
-      <ImageView fitHeight="1080.0" fitWidth="1080.0" layoutY="-86.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-      <Pane layoutX="134.0" layoutY="58.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <ImageView fitHeight="1100.0" fitWidth="1100.0" layoutY="-86.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="-354.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="6.0419921875" AnchorPane.topAnchor="-86.0">
+         <image>
+            <Image url="@../../../../mini%20project/UI%20DESIGN/Fullsize.png" />
+         </image>
+         <effect>
+            <GaussianBlur radius="29.0" />
+         </effect>
+      </ImageView>
+      <Pane layoutX="134.0" layoutY="58.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <ListView layoutX="11.0" layoutY="100.0" prefHeight="486.0" prefWidth="420.0" />
+            <ListView layoutX="456.0" layoutY="100.0" prefHeight="486.0" prefWidth="630.0" />
+            <ImageView layoutX="1035.0" layoutY="13.0">
+               <image>
+                  <Image url="@icons/three.png" />
+               </image>
+            </ImageView>
+            <TextField layoutX="816.0" layoutY="66.0" prefHeight="25.0" prefWidth="269.0" />
+            <ImageView fitHeight="28.0" fitWidth="28.0" layoutX="104.0" layoutY="599.0">
+               <image>
+                  <Image url="@icons/play.png" />
+               </image>
+               <effect>
+                  <Glow level="1.0" />
+               </effect>
+            </ImageView>
+            <ProgressBar layoutX="213.0" layoutY="612.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="3.0" prefWidth="584.0" progress="0.0" />
+            <ImageView fitHeight="28.0" fitWidth="28.0" layoutX="162.0" layoutY="600.0">
+               <image>
+                  <Image url="@icons/ff.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="28.0" fitWidth="28.0" layoutX="40.0" layoutY="598.0" rotate="180.0">
+               <image>
+                  <Image url="@icons/ff.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="86.0" fitWidth="86.0" layoutX="11.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../mini%20project/UI%20DESIGN/Fullsize.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
    </children>
 </AnchorPane>
