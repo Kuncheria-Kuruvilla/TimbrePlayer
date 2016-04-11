@@ -5,6 +5,7 @@
  */
 package javafxapplication5;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -15,6 +16,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.stage.DirectoryChooser;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 /**
@@ -28,11 +31,21 @@ public class MediaLibController implements Initializable {
      * Initializes the controller class.
      */
     Stage stage;
+    TimbrePlayer p=new TimbrePlayer();
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
     
+    @FXML
+    public void addFolder(){
+        DirectoryChooser chooser= new DirectoryChooser();
+        chooser.setTitle("Open Directory");
+        File file= chooser.showDialog(new Stage());
+        String s=file+"";
+        System.out.println(s);
+        p.extract(s);
+    }
     @FXML
     public void switchToMedia(Event event) throws IOException {
         try{

@@ -50,7 +50,7 @@
             <Image url="@icons/play.png" />
          </image>
       </ImageView>
-      <Label layoutX="-7.0" layoutY="356.0" prefHeight="70.0" prefWidth="290.0" text="Add new Folder" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="788.0" AnchorPane.topAnchor="290.0" />
+      <Label layoutX="-7.0" layoutY="356.0" onMouseClicked="#addFolder" prefHeight="70.0" prefWidth="290.0" text="Add new Folder" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="788.0" AnchorPane.topAnchor="290.0" />
       <Label layoutX="-7.0" layoutY="254.0" prefHeight="70.0" prefWidth="292.0" text="Label" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="788.0" AnchorPane.topAnchor="210.0" />
       <ImageView fitHeight="44.0" fitWidth="42.0" layoutX="108.0" layoutY="304.0" AnchorPane.leftAnchor="108.0">
          <image>

@@ -6,11 +6,13 @@
 package javafxapplication5;
 
 import java.io.BufferedInputStream;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.scene.control.ProgressBar;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.FloatControl;
 import javax.sound.sampled.Mixer;
@@ -134,7 +136,7 @@ public class TimbrePlayer {
         }
     }
     
-    public void slider(JProgressBar jb){
+    public void slider(ProgressBar jb){
         float pos;
         int intpos;
         if(fis!=null){
@@ -142,7 +144,8 @@ public class TimbrePlayer {
             pos= (SongLength-fis.available());
             pos=((pos/SongLength)*200);
             intpos=(int) pos;
-            jb.setValue(intpos);
+            //jb.setValue(intpos);
+            jb.setProgress(pos);
         } catch (IOException ex) {
             System.err.println("PLAYER ISSUE");
         }
@@ -177,6 +180,24 @@ public class TimbrePlayer {
                 }
             }.start();
 
+        
+    }
+    public void extract(String p){
+        File f =new File(p);
+        File l[]=f.listFiles();
+        for(File x:l)
+        {
+            if(x==null){return;}
+            if(x.isHidden()||!x.canRead())
+                continue;
+            if(x.isDirectory())
+                extract(x.getPath());
+            
+            else if(x.getName().endsWith(".mp3"))
+            {
+                System.out.println(x.getPath()+"::"+x.getName());
+            }
+        }
         
     }
 }
