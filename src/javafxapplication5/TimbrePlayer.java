@@ -56,6 +56,7 @@ public class TimbrePlayer {
 
     public void play(String path) {
         try {
+            stop();
             fis = new FileInputStream(path);
             bis = new BufferedInputStream(fis);
             player = new Player(bis);

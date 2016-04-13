@@ -57,7 +57,7 @@ public class FXMLController implements Initializable {
     @FXML
     private ImageView play;
 
-    TimbrePlayer P = new TimbrePlayer();
+    //TimbrePlayer P = new TimbrePlayer();
     Boolean PlayOrPause = false;
     Stage stage;
 
@@ -83,10 +83,10 @@ public class FXMLController implements Initializable {
                 }
             }
             if (PlayOrPause == false) {
-                P.play(song);
+                Timbre.p.play(song);
                 PlayOrPause = true;
             } else {
-                P.pause();
+                Timbre.p.pause();
                 PlayOrPause = false;
             }
         } catch (IOException ex) {

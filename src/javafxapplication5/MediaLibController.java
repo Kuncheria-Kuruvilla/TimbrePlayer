@@ -47,7 +47,7 @@ public class MediaLibController implements Initializable {
      * Initializes the controller class.
      */
     Stage stage;
-    TimbrePlayer p = new TimbrePlayer();
+    //TimbrePlayer p = new TimbrePlayer();
     @FXML
     private TableView<AllSongs> songList;
     @FXML
@@ -79,7 +79,7 @@ public class MediaLibController implements Initializable {
                 if (event.getClickCount() == 2 && (!row.isEmpty())) {
                     AllSongs rowData = row.getItem();
                     System.out.println("DATA:" + rowData.Location);
-                    p.play(rowData.Location);
+                    Timbre.p.play(rowData.Location);
                 }
             });
             return row;
@@ -94,7 +94,7 @@ public class MediaLibController implements Initializable {
         File file = chooser.showDialog(new Stage());
         String s = file + "";
         System.out.println(s);
-        p.extract(s);
+        Timbre.p.extract(s);
         updateAllSongs();
     }
 
