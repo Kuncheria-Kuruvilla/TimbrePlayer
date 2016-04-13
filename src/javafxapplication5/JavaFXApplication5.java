@@ -15,7 +15,9 @@ import javafx.stage.Stage;
  *
  * @author Ameen
  */
+
 public class JavaFXApplication5 extends Application {
+    public static TimbrePlayer p= new TimbrePlayer();
     
     @Override
     public void start(Stage stage) throws Exception {

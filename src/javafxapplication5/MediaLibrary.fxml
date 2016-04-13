@@ -14,7 +14,6 @@
         <URL value="@medialib.css" />
     </stylesheets>
    <children>
-      <ListView layoutX="340.0" layoutY="124.0" prefHeight="442.0" prefWidth="712.0" AnchorPane.bottomAnchor="98.0" AnchorPane.leftAnchor="340.0" AnchorPane.rightAnchor="28.0" AnchorPane.topAnchor="100.0" />
       <ImageView fx:id="backGround" fitHeight="1080.0" fitWidth="1100.0" layoutX="1.0" layoutY="-76.0">
          <effect>
             <GaussianBlur radius="29.0" />
@@ -23,33 +22,46 @@
             <Image url="@../../../../mini%20project/UI%20DESIGN/Fullsize.png" />
          </image>
       </ImageView>
-      <ProgressBar fx:id="pBar" layoutX="246.0" layoutY="597.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="3.0" prefWidth="584.0" progress="0.0" />
-      <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="1034.0" layoutY="578.0">
-         <image>
-            <Image url="@icons/vol+.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="28.0" fitWidth="19.0" layoutX="860.0" layoutY="581.0">
-         <image>
-            <Image url="@icons/vol%20down.png" />
-         </image>
-      </ImageView>
-      <Slider fx:id="volSlider" layoutX="884.0" layoutY="587.0" />
-      <ImageView fitHeight="28.0" fitWidth="28.0" layoutX="50.0" layoutY="581.0">
-         <image>
-            <Image url="@icons/ff.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="28.0" fitWidth="28.0" layoutX="176.0" layoutY="582.0">
-         <image>
-            <Image url="@icons/ff.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="42.0" fitWidth="34.0" layoutX="115.0" layoutY="574.0">
-         <image>
-            <Image url="@icons/play.png" />
-         </image>
-      </ImageView>
+      <Pane opacity="0.29" prefHeight="650.0" prefWidth="1090.0" style="-fx-background-color: black;" />
+      <Pane prefHeight="650.0" prefWidth="1090.0">
+         <children>
+            <ImageView fitHeight="28.0" fitWidth="28.0" x="176.0" y="581.0">
+               <image>
+                  <Image url="@icons/ff.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="28.0" fitWidth="28.0" x="50.0" y="581.0">
+               <image>
+                  <Image url="@icons/ff.png" />
+               </image>
+            </ImageView>
+            <ProgressBar fx:id="pBar" layoutX="246.0" layoutY="597.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="3.0" prefWidth="584.0" progress="0.0" />
+            <ImageView fitHeight="30.0" fitWidth="30.0" x="1034.0" y="581.0">
+               <image>
+                  <Image url="@icons/vol+.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="28.0" fitWidth="19.0" x="860.0" y="581.0">
+               <image>
+                  <Image url="@icons/vol%20down.png" />
+               </image>
+            </ImageView>
+            <Slider fx:id="volSlider" layoutX="884.0" layoutY="587.0" />
+            <ImageView fitHeight="42.0" fitWidth="34.0" x="115.0" y="574.0">
+               <image>
+                  <Image url="@icons/play.png" />
+               </image>
+            </ImageView>
+            <TableView fx:id="songList" blendMode="DARKEN" layoutX="298.0" layoutY="123.0" prefHeight="444.0" prefWidth="760.0" tableMenuButtonVisible="true">
+              <columns>
+                <TableColumn fx:id="TrackName" prefWidth="211.0" text="Title" />
+                <TableColumn fx:id="Artist" prefWidth="231.0" text="Artist" />
+                  <TableColumn fx:id="Album" prefWidth="219.0" text="Album" />
+                  <TableColumn fx:id="Year" prefWidth="98.0" text="Year" />
+              </columns>
+            </TableView>
+         </children>
+      </Pane>
       <Label layoutX="-7.0" layoutY="356.0" onMouseClicked="#addFolder" prefHeight="70.0" prefWidth="290.0" text="Add new Folder" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="788.0" AnchorPane.topAnchor="290.0" />
       <Label layoutX="-7.0" layoutY="254.0" prefHeight="70.0" prefWidth="292.0" text="Label" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="788.0" AnchorPane.topAnchor="210.0" />
       <ImageView fitHeight="44.0" fitWidth="42.0" layoutX="108.0" layoutY="304.0" AnchorPane.leftAnchor="108.0">

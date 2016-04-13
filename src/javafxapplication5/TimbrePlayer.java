@@ -5,7 +5,14 @@
  */
 package javafxapplication5;
 
+import com.mpatric.mp3agic.ID3v2;
+import com.mpatric.mp3agic.InvalidDataException;
+import com.mpatric.mp3agic.Mp3File;
+import com.mpatric.mp3agic.UnsupportedTagException;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.io.BufferedInputStream;
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -13,21 +20,27 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.scene.control.ProgressBar;
+import javax.imageio.ImageIO;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.FloatControl;
 import javax.sound.sampled.Mixer;
 import javax.sound.sampled.Port;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JProgressBar;
 import javax.swing.JSlider;
 import javazoom.jl.decoder.JavaLayerException;
 import javazoom.jl.player.Player;
+import org.farng.mp3.MP3File;
+import org.farng.mp3.TagException;
+import org.farng.mp3.id3.ID3v1;
 
 /**
  *
  * @author Ameen
  */
 public class TimbrePlayer {
+
     Player player;
     FileInputStream fis;
     BufferedInputStream bis;
@@ -35,9 +48,10 @@ public class TimbrePlayer {
     long SongLength;
     String FileLocation;
     boolean control = true;
+    String songTable = "AllSongs";
 
     public static void main(String[] args) {
-        
+
     }
 
     public void play(String path) {
@@ -135,69 +149,281 @@ public class TimbrePlayer {
             JOptionPane.showMessageDialog(null, "Erro\n" + e);
         }
     }
-    
-    public void slider(ProgressBar jb){
+
+    public void slider(ProgressBar jb) {
         float pos;
         int intpos;
-        if(fis!=null){
-        try {
-            pos= (SongLength-fis.available());
-            pos=((pos/SongLength)*200);
-            intpos=(int) pos;
-            //jb.setValue(intpos);
-            jb.setProgress(pos);
-        } catch (IOException ex) {
-            System.err.println("PLAYER ISSUE");
-        }
-        }
-    }
-    
-    public void seekTo(int val){
+        if (fis != null) {
             try {
-                fis = new FileInputStream(FileLocation);
-                bis = new BufferedInputStream(fis);
-                player = new Player(bis);
-                float floatval=(float)val;
-                floatval=(float) (floatval/200.0);
-                floatval=(floatval*SongLength);
-                fis.skip((long)floatval);
-                
+                pos = (SongLength - fis.available());
+                pos = ((pos / SongLength) * 200);
+                intpos = (int) pos;
+                //jb.setValue(intpos);
+                jb.setProgress(pos);
             } catch (IOException ex) {
                 System.err.println("PLAYER ISSUE");
-            } catch (JavaLayerException ex) {
-                System.err.println("CANNOT ASSIGN PLAYER");
-            }
-            control = true;
-            new Thread() {
-
-                @Override
-                public void run() {
-                    try {
-                        player.play();
-                    } catch (JavaLayerException ex) {
-                        System.err.println("PLAYER CANNOT PLAY");
-                    }
-                }
-            }.start();
-
-        
-    }
-    public void extract(String p){
-        File f =new File(p);
-        File l[]=f.listFiles();
-        for(File x:l)
-        {
-            if(x==null){return;}
-            if(x.isHidden()||!x.canRead())
-                continue;
-            if(x.isDirectory())
-                extract(x.getPath());
-            
-            else if(x.getName().endsWith(".mp3"))
-            {
-                System.out.println(x.getPath()+"::"+x.getName());
             }
         }
-        
+    }
+
+    public void seekTo(int val) {
+        try {
+            fis = new FileInputStream(FileLocation);
+            bis = new BufferedInputStream(fis);
+            player = new Player(bis);
+            float floatval = (float) val;
+            floatval = (float) (floatval / 200.0);
+            floatval = (floatval * SongLength);
+            fis.skip((long) floatval);
+
+        } catch (IOException ex) {
+            System.err.println("PLAYER ISSUE");
+        } catch (JavaLayerException ex) {
+            System.err.println("CANNOT ASSIGN PLAYER");
+        }
+        control = true;
+        new Thread() {
+
+            @Override
+            public void run() {
+                try {
+                    player.play();
+                } catch (JavaLayerException ex) {
+                    System.err.println("PLAYER CANNOT PLAY");
+                }
+            }
+        }.start();
+
+    }
+
+    public String genreToString(byte b) {
+        String genre = new String();
+        switch (b) {
+            case 0:
+                genre = "Blues";
+                break;
+            case 1:
+                genre = "Classic Rock";
+                break;
+            case 2:
+                genre = "Country";
+                break;
+            case 3:
+                genre = "Dance";
+                break;
+            case 4:
+                genre = "Disco";
+                break;
+            case 5:
+                genre = "Funk";
+                break;
+            case 6:
+                genre = "Grunge";
+                break;
+            case 7:
+                genre = "Hip-Hop";
+                break;
+            case 8:
+                genre = "Jazz";
+                break;
+            case 9:
+                genre = "Metal";
+                break;
+            case 10:
+                genre = "New Age";
+                break;
+            case 11:
+                genre = "Oldies";
+                break;
+            case 12:
+                genre = "Other";
+                break;
+            case 13:
+                genre = "Pop";
+            case 14:
+                genre = "R&B";
+                break;
+            case 15:
+                genre = "Rap";
+                break;
+            case 16:
+                genre = "Reggae";
+                break;
+            case 17:
+                genre = "Rock";
+                break;
+            case 18:
+                genre = "Techno";
+                break;
+            case 19:
+                genre = "Industrial";
+                break;
+            case 20:
+                genre = "Alternative";
+                break;
+            case 21:
+                genre = "Ska";
+                break;
+            case 22:
+                genre = "Death Metal";
+                break;
+            case 23:
+                genre = "Pranks";
+                break;
+            case 24:
+                genre = "Soundtrack";
+                break;
+            case 25:
+                genre = "Euro-Techno";
+                break;
+            case 26:
+                genre = "Ambient";
+                break;
+            case 27:
+                genre = "Trip-Hop";
+                break;
+            case 28:
+                genre = "Vocal";
+                break;
+            case 29:
+                genre = "Jazz+Funk";
+                break;
+            case 30:
+                genre = "Fusion";
+                break;
+            case 31:
+                genre = "Trance";
+                break;
+            case 32:
+                genre = "Classical";
+                break;
+            case 33:
+                genre = "Instrumental";
+                break;
+            case 34:
+                genre = "Acid";
+                break;
+            case 35:
+                genre = "House";
+                break;
+            case 36:
+                genre = "Game";
+                break;
+            case 37:
+                genre = "Sound Clip";
+                break;
+            case 38:
+                genre = "Gospel";
+                break;
+            case 39:
+                genre = "Noise";
+                break;
+            case 40:
+                genre = "AlternRock";
+                break;
+            case 41:
+                genre = "Bass";
+                break;
+            case 42:
+                genre = "Soul";
+                break;
+            case 43:
+                genre = "Punk";
+                break;
+            case 44:
+                genre = "Space";
+                break;
+            case 45:
+                genre = "Meditative";
+                break;
+            case 46:
+                genre = "Instrumental Pop";
+                break;
+            case 47:
+                genre = "Instrumental Rock";
+                break;
+            case 48:
+                genre = "Ethnic";
+                break;
+            case 49:
+                genre = "Gothic";
+                break;
+            case 50:
+                genre = "Darkwave";
+                break;
+            case 51:
+                genre = "Techno-Industrial";
+                break;
+            case 52:
+                genre = "Electronic";
+                break;
+            /* 53. Pop-Folk
+ 54. Eurodance
+ 55. Dream
+ 56. Southern Rock
+ 57. Comedy
+ 58. Cult
+ 59. Gangsta
+ 60. Top 40
+ 61. Christian Rap
+ 62. Pop/Funk
+ 63. Jungle
+ 64. Native American
+ 65. Cabaret
+ 66. New Wave
+ 67. Psychadelic
+ 68. Rave
+ 69. Showtunes
+ 70. Trailer
+ 71. Lo-Fi
+ 72. Tribal
+ 73. Acid Punk
+ 74. Acid Jazz
+ 75. Polka
+ 76. Retro
+ 77. Musical
+ 78. Rock & Roll
+ 79. Hard Rock*/
+        }
+        return genre;
+    }
+
+    public void extract(String p) {
+        File f = new File(p);
+        File l[] = f.listFiles();
+        DBHandler db = new DBHandler();
+        File path;
+        for (File x : l) {
+            if (x == null) {
+                return;
+            }
+            if (x.isHidden() || !x.canRead()) {
+                continue;
+            }
+            if (x.isDirectory()) {
+                extract(x.getPath());
+            } else if (x.getName().endsWith(".mp3")) {
+                path = new File(x.getPath());
+                try {
+                    MP3File mpf = new MP3File(path);
+                    //Mp3File  mpf2 =new Mp3File(song);
+                    String title = new String();
+                    ID3v1 id = new ID3v1();
+                    id = mpf.getID3v1Tag();
+                    String titlename = id.getSongTitle();
+                    String artist = id.getArtist();
+                    String album = id.getAlbumTitle();
+                    String year = id.getYearReleased();
+                    //String genere = id.getSongGenre();
+                    String loc = x.getPath();
+                    String stmt = "INSERT INTO " + songTable + " VALUES('" + titlename + "','" + artist + "','" + album + "','" + year + "','" + loc + "')";
+                    db.execute(stmt);
+                } catch (IOException | TagException ex) {
+                    //Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+            }
+        }
+
     }
 }

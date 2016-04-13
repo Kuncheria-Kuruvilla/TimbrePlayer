@@ -16,7 +16,7 @@ import java.sql.Statement;
  * @author Ameen
  */
 public class DBHandler {
-        private static final String dbURL = "jdbc:derby:database/base;create=true";
+        private static final String dbURL = "jdbc:derby://localhost:1527/TimbreDB";
 		//    private static final String dbURL = "jdbc:derby://localhost:1527/la;create=true";
         Connection conn;
     Statement stmt;
@@ -28,10 +28,10 @@ public class DBHandler {
 	}
     private void createConnection() {
         try {
-            Class.forName("org.apache.derby.jdbc.EmbeddedDriver").newInstance();
+            Class.forName("org.apache.derby.jdbc.ClientDriver").newInstance();
             conn = DriverManager.getConnection(dbURL, "root", "root");
-            String query="CREATE TABLE "+Table1+"(TrackName string,Artist string,Album string,Location string);";
-            execute(query);
+            //String query="CREATE TABLE "+Table1+"(TrackName varchar(100),Artist varchar(100),Album varchar(100),ReleaseYear varchar(100),Location varchar(100))";
+            //execute(query);
             
         } catch (Exception e) {
             System.err.println(e.getMessage());
@@ -58,7 +58,7 @@ public class DBHandler {
             stmt = conn.createStatement();
             result = stmt.executeQuery(query);
         } catch (SQLException ex) {
-            System.out.println("Exception at execQuery:dataHandler" + ex.getLocalizedMessage());
+            System.out.println("Exception at execQuery:dataHandler " + ex.getLocalizedMessage());
             return null;
         }
         return result;
@@ -69,7 +69,7 @@ public class DBHandler {
             stmt = conn.createStatement();
             stmt.execute(query);
         } catch (SQLException ex) {
-            System.out.println("Exception at execQuery:dataHandler" + ex.getLocalizedMessage());
+            System.out.println("Exception at execute:dataHandler " + ex.getLocalizedMessage());
             return false;
         }
         return true;

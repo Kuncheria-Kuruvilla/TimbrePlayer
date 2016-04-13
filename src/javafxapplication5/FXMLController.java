@@ -98,14 +98,11 @@ public class FXMLController implements Initializable {
         }
     }
 
-    public void ss() {
-        System.out.println("what the fuck");
-    }
 
     @FXML
     public void switchToMedia(Event event) throws IOException {
         try{
-             Parent root = FXMLLoader.load(getClass().getResource("MediaLib.fxml"));
+             Parent root = FXMLLoader.load(getClass().getResource("MediaLibrary.fxml"));
 
         Scene scene = new Scene(root);
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -137,7 +134,7 @@ public class FXMLController implements Initializable {
     @FXML
     public void switchToPlaylist(Event event) throws IOException {
         try{
-             Parent root = FXMLLoader.load(getClass().getResource("playlist.fxml"));
+             Parent root = FXMLLoader.load(getClass().getResource("PlaylistLib.fxml"));
 
         Scene scene = new Scene(root);
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
