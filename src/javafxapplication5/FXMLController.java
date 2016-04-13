@@ -14,6 +14,11 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -63,7 +68,38 @@ public class FXMLController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        try {
+            // TODO
+            String ste = "SELECT LOCATION FROM ALLSONGS";
+            Statement st;
+            ResultSet rs;
+            Connection conn;
+            conn = DriverManager.getConnection("jdbc:derby://localhost:1527/TimbreDB", "root", "root");
+            st = conn.createStatement();
+            rs=st.executeQuery(ste);
+            rs.next();
+            String path=rs.getString(1);
+            Mp3File mpf2 = new Mp3File(path);
+            if (mpf2.hasId3v2Tag()) {
+                ID3v2 id3v2tag = mpf2.getId3v2Tag();
+                byte[] imageData = id3v2tag.getAlbumImage();
+                if (imageData != null) {
+                    System.out.println("debug:: imageData is not null");
+                    BufferedImage img = ImageIO.read(new ByteArrayInputStream(imageData));
+                    Image image = SwingFXUtils.toFXImage(img, null);
+                    albumArt.setImage(image);
+                    backGround.setImage(image);
+                }
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(FXMLController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (UnsupportedTagException ex) {
+            Logger.getLogger(FXMLController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InvalidDataException ex) {
+            Logger.getLogger(FXMLController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(FXMLController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @FXML

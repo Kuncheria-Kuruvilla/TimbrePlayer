@@ -5,6 +5,12 @@
  */
 package javafxapplication5;
 
+import com.mpatric.mp3agic.ID3v2;
+import com.mpatric.mp3agic.InvalidDataException;
+import com.mpatric.mp3agic.Mp3File;
+import com.mpatric.mp3agic.UnsupportedTagException;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -18,6 +24,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -31,10 +38,13 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javax.imageio.ImageIO;
 
 /**
  * FXML Controller class
@@ -48,6 +58,8 @@ public class MediaLibController implements Initializable {
      */
     Stage stage;
     //TimbrePlayer p = new TimbrePlayer();
+    @FXML
+    ImageView backGround;
     @FXML
     private TableView<AllSongs> songList;
     @FXML
@@ -65,13 +77,12 @@ public class MediaLibController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-        //updateAllSongs();
+        String path;
         TrackName.setCellValueFactory(new PropertyValueFactory<AllSongs, String>("Title"));
         Artist.setCellValueFactory(new PropertyValueFactory<AllSongs, String>("Artist"));
         Album.setCellValueFactory(new PropertyValueFactory<AllSongs, String>("Album"));
         Year.setCellValueFactory(new PropertyValueFactory<AllSongs, String>("Year"));
-        updateAllSongs();
+        updateScene();
         songList.setItems(data);
         songList.setRowFactory(tv -> {
             TableRow<AllSongs> row = new TableRow<>();
@@ -79,11 +90,37 @@ public class MediaLibController implements Initializable {
                 if (event.getClickCount() == 2 && (!row.isEmpty())) {
                     AllSongs rowData = row.getItem();
                     System.out.println("DATA:" + rowData.Location);
+                    
                     Timbre.p.play(rowData.Location);
+                    ResultSet rs;
+                    Statement st;
+                    Connection conn;
+                    String ste;
+                    try {
+                        conn = DriverManager.getConnection("jdbc:derby://localhost:1527/TimbreDB", "root", "root");
+                        st = conn.createStatement();
+                        int i = 0, h = 0;
+                        String str;
+                        try {
+                            
+                            ste = "DELETE FROM NOWPLAYING";
+                            st.execute(ste);
+                            ste = "INSERT INTO NOWPLAYING VALUES('"+rowData.Title+"','"+rowData.Location+"')";
+                            st.execute(ste);
+                            
+                        } catch (Exception err) {
+                            System.err.println(err);
+                            
+                        }
+                    } catch (SQLException ex) {                        
+                        Logger.getLogger(MediaLibController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    
                 }
             });
             return row;
         });
+        
 
     }
 
@@ -95,55 +132,86 @@ public class MediaLibController implements Initializable {
         String s = file + "";
         System.out.println(s);
         Timbre.p.extract(s);
-        updateAllSongs();
+        updateScene();
     }
 
     @FXML
-    public void updateAllSongs() {
+    public void updateScene() {
         try {
-            ResultSet rs;
+            try {
+                ResultSet rs;
+                Statement st;
+                Connection conn;
+                conn = DriverManager.getConnection("jdbc:derby://localhost:1527/TimbreDB", "root", "root");
+                st = conn.createStatement();
+                int i = 0, h = 0;
+                String str;
+                try {
+                    
+                    String ste = "SELECT COUNT(TRACKNAME) FROM ALLSONGS";
+                    rs = st.executeQuery(ste);
+                    rs.next();
+                    h = rs.getInt(1);
+                    System.err.println("hello:" + h);
+                } catch (Exception err) {
+                    System.err.println(err);
+                    
+                }
+                try {
+                    
+                    str = "SELECT TRACKNAME,ARTIST,ALBUM,RELEASEYEAR,LOCATION FROM ALLSONGS";
+                    rs = st.executeQuery(str);
+                    
+                    while (rs.next()) {
+                        //System.out.println(rs.getString("NAME") + " " + rs.getInt("ROLLNO"));
+                        data.add(new AllSongs(
+                                rs.getString(1),
+                                rs.getString(2),
+                                rs.getString(3),
+                                rs.getString(4),
+                                rs.getString(5)
+                        ));
+                        //System.out.println(rs.getString(1));
+                    }
+                    
+// TODO add your handling code here:
+                } catch (Exception ex) {
+                    // Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
+                    System.err.println(ex);
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(MediaLibController.class.getName()).log(Level.SEVERE, null, ex);
+                
+            }
+            String ste = "SELECT LOCATION FROM NOWPLAYING";
             Statement st;
+            ResultSet rs;
             Connection conn;
             conn = DriverManager.getConnection("jdbc:derby://localhost:1527/TimbreDB", "root", "root");
             st = conn.createStatement();
-            int i = 0, h = 0;
-            String str;
-            try {
-
-                String ste = "SELECT COUNT(TRACKNAME) FROM ALLSONGS";
-                rs = st.executeQuery(ste);
-                rs.next();
-                h = rs.getInt(1);
-                System.err.println("hello:" + h);
-            } catch (Exception err) {
-                System.err.println(err);
-
-            }
-            try {
-
-                str = "SELECT TRACKNAME,ARTIST,ALBUM,RELEASEYEAR,LOCATION FROM ALLSONGS";
-                rs = st.executeQuery(str);
-
-                while (rs.next()) {
-                    //System.out.println(rs.getString("NAME") + " " + rs.getInt("ROLLNO"));
-                    data.add(new AllSongs(
-                            rs.getString(1),
-                            rs.getString(2),
-                            rs.getString(3),
-                            rs.getString(4),
-                            rs.getString(5)
-                    ));
-                    //System.out.println(rs.getString(1));
+            rs=st.executeQuery(ste);
+            rs.next();
+            String path=rs.getString(1);
+            Mp3File mpf2 = new Mp3File(path);
+            if (mpf2.hasId3v2Tag()) {
+                ID3v2 id3v2tag = mpf2.getId3v2Tag();
+                byte[] imageData = id3v2tag.getAlbumImage();
+                if (imageData != null) {
+                    System.out.println("debug:: imageData is not null");
+                    BufferedImage img = ImageIO.read(new ByteArrayInputStream(imageData));
+                    Image image = SwingFXUtils.toFXImage(img, null);
+                    backGround.setImage(image);
                 }
-
-// TODO add your handling code here:
-            } catch (Exception ex) {
-                // Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
-                System.err.println(ex);
             }
         } catch (SQLException ex) {
             Logger.getLogger(MediaLibController.class.getName()).log(Level.SEVERE, null, ex);
 
+        } catch (IOException ex) {
+            Logger.getLogger(MediaLibController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (UnsupportedTagException ex) {
+            Logger.getLogger(MediaLibController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InvalidDataException ex) {
+            Logger.getLogger(MediaLibController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

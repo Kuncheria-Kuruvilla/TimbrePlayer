@@ -52,12 +52,12 @@
                   <Image url="@icons/play.png" />
                </image>
             </ImageView>
-            <TableView fx:id="songList" blendMode="DARKEN" layoutX="298.0" layoutY="123.0" prefHeight="444.0" prefWidth="760.0" tableMenuButtonVisible="true">
+            <TableView fx:id="songList" blendMode="COLOR_BURN" layoutX="298.0" layoutY="83.0" prefHeight="444.0" prefWidth="760.0" tableMenuButtonVisible="true">
               <columns>
                 <TableColumn fx:id="TrackName" prefWidth="211.0" text="Title" />
                 <TableColumn fx:id="Artist" prefWidth="231.0" text="Artist" />
                   <TableColumn fx:id="Album" prefWidth="219.0" text="Album" />
-                  <TableColumn fx:id="Year" prefWidth="98.0" text="Year" />
+                  <TableColumn fx:id="Year" prefWidth="88.0" text="Year" />
               </columns>
             </TableView>
          </children>
