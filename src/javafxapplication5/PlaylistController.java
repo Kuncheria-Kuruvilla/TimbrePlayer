@@ -35,7 +35,7 @@ public class PlaylistController implements Initializable {
     @FXML
     public void switchToMedia(Event event) throws IOException {
         try{
-             Parent root = FXMLLoader.load(getClass().getResource("MediaLib.fxml"));
+             Parent root = FXMLLoader.load(getClass().getResource("MediaScene.fxml"));
 
         Scene scene = new Scene(root);
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();

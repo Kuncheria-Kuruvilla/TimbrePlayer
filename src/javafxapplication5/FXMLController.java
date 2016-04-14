@@ -12,6 +12,7 @@ import com.mpatric.mp3agic.UnsupportedTagException;
 //import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
@@ -22,6 +23,8 @@ import java.sql.Statement;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -38,6 +41,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import org.farng.mp3.MP3File;
+import org.farng.mp3.TagException;
+import org.farng.mp3.id3.ID3v1;
 
 /**
  * FXML Controller class
@@ -50,7 +56,11 @@ public class FXMLController implements Initializable {
      * Initializes the controller class.
      */
     @FXML
-    private Label label;
+    private Label TrackName;
+    @FXML
+    private Label Artist;
+    @FXML
+    private Label Genre;
     @FXML
     private Slider volSlider;
     @FXML
@@ -61,16 +71,20 @@ public class FXMLController implements Initializable {
     private ProgressBar pBar;
     @FXML
     private ImageView play;
+    @FXML
+    private Label volValue;    
 
     //TimbrePlayer P = new TimbrePlayer();
-    Boolean PlayOrPause = false;
+    //Boolean PlayOrPause = false;
     Stage stage;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
             // TODO
-            String ste = "SELECT LOCATION FROM ALLSONGS";
+            volSlider.setValue(50);
+            Timbre.p.volChange((float) volSlider.getValue());
+            String ste = "SELECT LOCATION FROM NOWPLAYING";
             Statement st;
             ResultSet rs;
             Connection conn;
@@ -79,7 +93,16 @@ public class FXMLController implements Initializable {
             rs=st.executeQuery(ste);
             rs.next();
             String path=rs.getString(1);
+            File f= new File(path);
+            MP3File  mpf =new MP3File(f);
             Mp3File mpf2 = new Mp3File(path);
+            String title = new String();
+                ID3v1 id=new ID3v1();             
+                id=mpf.getID3v1Tag();
+                //title=String.valueOf(mpf.getID3v1Tag());
+                TrackName.setText(id.getSongTitle());
+                Artist.setText(id.getArtist());
+                Genre.setText(Timbre.p.genreToString(id.getGenre()));
             if (mpf2.hasId3v2Tag()) {
                 ID3v2 id3v2tag = mpf2.getId3v2Tag();
                 byte[] imageData = id3v2tag.getAlbumImage();
@@ -99,46 +122,48 @@ public class FXMLController implements Initializable {
             Logger.getLogger(FXMLController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(FXMLController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (TagException ex) {
+            Logger.getLogger(FXMLController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        volSlider.valueProperty().addListener(new ChangeListener() {
+            @Override
+            public void changed(ObservableValue arg0, Object arg1, Object arg2){
+                //volValue.textProperty().setValue(String.valueOf((int) volSlider.getValue()));
+                Timbre.p.volChange((float) volSlider.getValue());
+            }
+        });
     }
 
     @FXML
     public void onPlayPressed(Event e) {
-        try {
-            String song = "sample.mp3";
-            Mp3File mpf2 = new Mp3File(song);
-            if (mpf2.hasId3v2Tag()) {
-                ID3v2 id3v2tag = mpf2.getId3v2Tag();
-                byte[] imageData = id3v2tag.getAlbumImage();
-                if (imageData != null) {
-                    System.out.println("debug:: imageData is not null");
-                    BufferedImage img = ImageIO.read(new ByteArrayInputStream(imageData));
-                    Image image = SwingFXUtils.toFXImage(img, null);
-                    albumArt.setImage(image);
-                    backGround.setImage(image);
-                }
-            }
-            if (PlayOrPause == false) {
-                Timbre.p.play(song);
-                PlayOrPause = true;
-            } else {
-                Timbre.p.pause();
-                PlayOrPause = false;
-            }
-        } catch (IOException ex) {
-            Logger.getLogger(FXMLController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (UnsupportedTagException ex) {
-            Logger.getLogger(FXMLController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (InvalidDataException ex) {
-            Logger.getLogger(FXMLController.class.getName()).log(Level.SEVERE, null, ex);
+        if (Timbre.p.control == false) {
+            Timbre.p.resume();
+            Timbre.p.control = true;
+        } else {
+            Timbre.p.pause();
+            Timbre.p.control = false;
         }
     }
 
+@FXML
+public void showEquilizer(){
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("Equilizer.fxml"));
+            Stage stage = new Stage();
+            stage.setTitle("Equilizer");
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(FXMLController.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
+
+}
     @FXML
     public void switchToMedia(Event event) throws IOException {
         try{
-             Parent root = FXMLLoader.load(getClass().getResource("MediaLibrary.fxml"));
+             Parent root = FXMLLoader.load(getClass().getResource("MediaScene.fxml"));
 
         Scene scene = new Scene(root);
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -176,6 +201,7 @@ public class FXMLController implements Initializable {
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(scene);
         stage.show();
+
         }
         catch(Exception e){
             System.out.println(e);

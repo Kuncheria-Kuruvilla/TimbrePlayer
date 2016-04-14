@@ -218,7 +218,7 @@ public class MediaLibController implements Initializable {
     @FXML
     public void switchToMedia(Event event) throws IOException {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("MediaLibrary.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("MediaScene.fxml"));
 
             Scene scene = new Scene(root);
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();

@@ -241,6 +241,7 @@ public class TimbrePlayer {
                 break;
             case 13:
                 genre = "Pop";
+                break;
             case 14:
                 genre = "R&B";
                 break;
@@ -426,5 +427,10 @@ public class TimbrePlayer {
             }
         }
 
+    }
+    
+    public void setEqualizer(String path){
+        
+        
     }
 }

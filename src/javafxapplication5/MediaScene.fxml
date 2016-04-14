@@ -30,7 +30,7 @@
                   <Image url="@icons/ff.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="28.0" fitWidth="28.0" x="50.0" y="581.0">
+            <ImageView fitHeight="28.0" fitWidth="28.0" rotate="180.0" x="50.0" y="581.0">
                <image>
                   <Image url="@icons/ff.png" />
                </image>
@@ -52,7 +52,7 @@
                   <Image url="@icons/play.png" />
                </image>
             </ImageView>
-            <TableView fx:id="songList" blendMode="COLOR_BURN" layoutX="298.0" layoutY="83.0" prefHeight="444.0" prefWidth="760.0" tableMenuButtonVisible="true">
+            <TableView fx:id="songList" blendMode="HARD_LIGHT" layoutX="298.0" layoutY="83.0" prefHeight="444.0" prefWidth="760.0" tableMenuButtonVisible="true">
               <columns>
                 <TableColumn fx:id="TrackName" prefWidth="211.0" text="Title" />
                 <TableColumn fx:id="Artist" prefWidth="231.0" text="Artist" />

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="289.0" prefWidth="448.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="javafxapplication5.EquilizerController">
+    <stylesheets>
+        <URL value="@equilizer.css" />
+    </stylesheets>
+   <children>
+      <Pane prefHeight="289.0" prefWidth="448.0">
+         <children>
+            <CheckBox layoutX="314.0" layoutY="46.0" mnemonicParsing="false" text="Dynamic Mode" />
+            <Slider layoutX="38.0" layoutY="115.0" orientation="VERTICAL" prefHeight="140.0" prefWidth="14.0" />
+            <Slider layoutX="78.0" layoutY="115.0" orientation="VERTICAL" prefHeight="140.0" prefWidth="14.0" />
+            <Slider layoutX="118.0" layoutY="115.0" orientation="VERTICAL" prefHeight="140.0" prefWidth="14.0" />
+            <Slider layoutX="238.0" layoutY="115.0" orientation="VERTICAL" prefHeight="140.0" prefWidth="14.0" />
+            <Slider layoutX="398.0" layoutY="115.0" orientation="VERTICAL" prefHeight="140.0" prefWidth="14.0" />
+            <Slider layoutX="198.0" layoutY="115.0" orientation="VERTICAL" prefHeight="140.0" prefWidth="14.0" />
+            <Slider layoutX="278.0" layoutY="115.0" orientation="VERTICAL" prefHeight="140.0" prefWidth="14.0" />
+            <Slider layoutX="318.0" layoutY="115.0" orientation="VERTICAL" prefHeight="140.0" prefWidth="14.0" />
+            <Slider layoutX="158.0" layoutY="115.0" orientation="VERTICAL" prefHeight="140.0" prefWidth="14.0" />
+            <Slider layoutX="358.0" layoutY="115.0" orientation="VERTICAL" prefHeight="140.0" prefWidth="14.0" />
+            <ComboBox layoutX="36.0" layoutY="42.0" prefWidth="150.0" />
+            <Label layoutX="38.0" layoutY="25.0" text="Presets" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
