@@ -14,19 +14,20 @@
    <children>
       <Pane prefHeight="289.0" prefWidth="448.0">
          <children>
-            <CheckBox layoutX="314.0" layoutY="46.0" mnemonicParsing="false" text="Dynamic Mode" />
-            <Slider layoutX="38.0" layoutY="115.0" orientation="VERTICAL" prefHeight="140.0" prefWidth="14.0" />
-            <Slider layoutX="78.0" layoutY="115.0" orientation="VERTICAL" prefHeight="140.0" prefWidth="14.0" />
-            <Slider layoutX="118.0" layoutY="115.0" orientation="VERTICAL" prefHeight="140.0" prefWidth="14.0" />
-            <Slider layoutX="238.0" layoutY="115.0" orientation="VERTICAL" prefHeight="140.0" prefWidth="14.0" />
-            <Slider layoutX="398.0" layoutY="115.0" orientation="VERTICAL" prefHeight="140.0" prefWidth="14.0" />
-            <Slider layoutX="198.0" layoutY="115.0" orientation="VERTICAL" prefHeight="140.0" prefWidth="14.0" />
-            <Slider layoutX="278.0" layoutY="115.0" orientation="VERTICAL" prefHeight="140.0" prefWidth="14.0" />
-            <Slider layoutX="318.0" layoutY="115.0" orientation="VERTICAL" prefHeight="140.0" prefWidth="14.0" />
-            <Slider layoutX="158.0" layoutY="115.0" orientation="VERTICAL" prefHeight="140.0" prefWidth="14.0" />
-            <Slider layoutX="358.0" layoutY="115.0" orientation="VERTICAL" prefHeight="140.0" prefWidth="14.0" />
+            <CheckBox layoutX="307.0" layoutY="46.0" mnemonicParsing="false" text="Dynamic Mode" />
+            <Slider fx:id="Hz32" blockIncrement="0.02" layoutX="38.0" layoutY="115.0" max="1.0" min="-1.0" orientation="VERTICAL" prefHeight="140.0" prefWidth="14.0" />
+            <Slider fx:id="Hz64" blockIncrement="0.02" layoutX="78.0" layoutY="115.0" max="1.0" min="-1.0" orientation="VERTICAL" prefHeight="140.0" prefWidth="14.0" />
+            <Slider fx:id="Hz125" blockIncrement="0.02" layoutX="118.0" layoutY="115.0" max="1.0" min="-1.0" orientation="VERTICAL" prefHeight="140.0" prefWidth="14.0" />
+            <Slider fx:id="Hz1K" blockIncrement="0.02" layoutX="238.0" layoutY="115.0" max="1.0" min="-1.0" orientation="VERTICAL" prefHeight="140.0" prefWidth="14.0" />
+            <Slider fx:id="Hz16K" blockIncrement="0.02" layoutX="398.0" layoutY="115.0" max="1.0" min="-1.0" orientation="VERTICAL" prefHeight="140.0" prefWidth="14.0" />
+            <Slider fx:id="Hz500" blockIncrement="0.02" layoutX="198.0" layoutY="115.0" max="1.0" min="-1.0" orientation="VERTICAL" prefHeight="140.0" prefWidth="14.0" />
+            <Slider fx:id="Hz2K" blockIncrement="0.02" layoutX="278.0" layoutY="115.0" max="1.0" min="-1.0" orientation="VERTICAL" prefHeight="140.0" prefWidth="14.0" />
+            <Slider fx:id="Hz4K" blockIncrement="0.02" layoutX="318.0" layoutY="115.0" max="1.0" min="-1.0" orientation="VERTICAL" prefHeight="140.0" prefWidth="14.0" />
+            <Slider fx:id="Hz250" blockIncrement="0.02" layoutX="158.0" layoutY="115.0" max="1.0" min="-1.0" orientation="VERTICAL" prefHeight="140.0" prefWidth="14.0" />
+            <Slider fx:id="Hz8K" blockIncrement="0.02" layoutX="358.0" layoutY="115.0" max="1.0" min="-1.0" orientation="VERTICAL" prefHeight="140.0" prefWidth="14.0" />
             <ComboBox layoutX="36.0" layoutY="42.0" prefWidth="150.0" />
             <Label layoutX="38.0" layoutY="25.0" text="Presets" />
+            <ToggleButton layoutX="309.0" layoutY="13.0" mnemonicParsing="false" text="Equalizer ON" />
          </children>
       </Pane>
    </children>

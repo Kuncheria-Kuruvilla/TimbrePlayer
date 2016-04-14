@@ -50,6 +50,7 @@ public class TimbrePlayer {
     long SongLength;
     String FileLocation;
     boolean control = true;
+    boolean dynamicModeOn;
     String songTable = "AllSongs";
     String presets[] = {"Custom", "Classical", "Club", "Dance", "Dubstep", "Full Bass",
         "Full Treble", "Full Bass + Treble", "HipHop", "Kuduro", "Laptop/Headphones",
