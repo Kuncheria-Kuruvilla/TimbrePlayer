@@ -119,9 +119,20 @@ public class MediaLibController implements Initializable {
                 }
             });
             return row;
+            
         });
         
 
+    }
+    @FXML
+    public void onPlayPressed(Event e) {
+        if (Timbre.p.control == false) {
+            Timbre.p.resume();
+            Timbre.p.control = true;
+        } else {
+            Timbre.p.pause();
+            Timbre.p.control = false;
+        }
     }
 
     @FXML
@@ -259,4 +270,5 @@ public class MediaLibController implements Initializable {
         }
 
     }
+    
 }

@@ -31,7 +31,17 @@ public class PlaylistController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
+    }
+   @FXML
+    public void onPlayPressed(Event e) {
+        if (Timbre.p.control == false) {
+            Timbre.p.resume();
+            Timbre.p.control = true;
+        } else {
+            Timbre.p.pause();
+            Timbre.p.control = false;
+        }
+    } 
     @FXML
     public void switchToMedia(Event event) throws IOException {
         try{

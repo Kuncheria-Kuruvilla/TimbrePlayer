@@ -47,7 +47,7 @@
                </image>
             </ImageView>
             <Slider fx:id="volSlider" layoutX="884.0" layoutY="587.0" />
-            <ImageView fitHeight="42.0" fitWidth="34.0" x="115.0" y="574.0">
+            <ImageView fitHeight="42.0" fitWidth="34.0" onMouseClicked="#onPlayPressed" x="115.0" y="574.0">
                <image>
                   <Image url="@icons/play.png" />
                </image>
