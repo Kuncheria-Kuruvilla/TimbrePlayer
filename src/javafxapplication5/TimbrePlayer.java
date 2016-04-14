@@ -29,6 +29,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JProgressBar;
 import javax.swing.JSlider;
+import javazoom.jl.decoder.Equalizer;
 import javazoom.jl.decoder.JavaLayerException;
 import javazoom.jl.player.Player;
 import org.farng.mp3.MP3File;
@@ -42,6 +43,7 @@ import org.farng.mp3.id3.ID3v1;
 public class TimbrePlayer {
 
     Player player;
+    Equalizer eq = new Equalizer();
     FileInputStream fis;
     BufferedInputStream bis;
     long PauseLocation;
@@ -49,6 +51,9 @@ public class TimbrePlayer {
     String FileLocation;
     boolean control = true;
     String songTable = "AllSongs";
+    String presets[] = {"Custom", "Classical", "Club", "Dance", "Dubstep", "Full Bass",
+        "Full Treble", "Full Bass + Treble", "HipHop", "Kuduro", "Laptop/Headphones",
+        "Large Hall", "Live", "Party", "Pop", "Psychedelic", "Reggae", "Rock", "Soft", "Ska", "Soft Rock", "Techno", "Zero"};
 
     public static void main(String[] args) {
 
@@ -79,6 +84,7 @@ public class TimbrePlayer {
                 }
             }
         }.start();
+        setEqualizer(path);
     }
 
     public void stop() {
@@ -222,7 +228,7 @@ public class TimbrePlayer {
                 genre = "Grunge";
                 break;
             case 7:
-                genre = "Hip-Hop";
+                genre = "HipHop";
                 break;
             case 8:
                 genre = "Jazz";
@@ -390,6 +396,130 @@ public class TimbrePlayer {
         return genre;
     }
 
+    public String matchPreset(String genre) {
+        int l = presets.length;
+        System.out.println("length:" + l);
+        for (int i = 0; i < l; i++) {
+            if (presets[i].contains(genre)) {
+                return presets[i];
+            }
+        }
+        return "Zero";
+    }
+
+    public float[] getEqualizerValue(String preset) {
+        float[] value = new float[32];
+        for (int i = 0; i < 32; i++) {
+            value[i] = 0;
+        }
+        switch (preset) {
+            case "Custom":
+                for (int i = 0; i < 32; i++) {
+                    value[i] = 0;
+                }
+                break;
+            case "Zero":
+                for (int i = 0; i < 32; i++) {
+                    value[i] = 0;
+                }
+                break;
+            case "Classical":
+                value[2] = 0;
+                value[5] = 0;
+                value[8] = 0;
+                value[11] = 0;
+                value[14] = 0;
+                value[17] = 0;
+                value[20] = 0;
+                value[23] = 0;
+                value[26] = 0;
+                value[29] = 0;
+                break;
+            case "Club":
+                value[2] = 0;
+                value[5] = 0;
+                value[8] = 0;
+                value[11] = 0;
+                value[14] = 0;
+                value[17] = 0;
+                value[20] = (float) -0.40;
+                value[23] = (float) -0.40;
+                value[26] = (float) -0.40;
+                value[29] = (float) -0.50;
+                break;
+            case "Dance":
+                value[2] = (float) 0.50;
+                value[5] = (float) 0.35;
+                value[8] = (float) 0.10;
+                value[11] = (float) 0;
+                value[14] = (float) 0;
+                value[17] = (float) -0.30;
+                value[20] = (float) -0.40;
+                value[23] = (float) -0.40;
+                value[26] = (float) 0;
+                value[29] = (float) 0;
+                break;
+            case "Dubstep":
+                value[2] = (float) 0;
+                value[5] = (float) 0.36;
+                value[8] = (float) 0.85;
+                value[11] = (float) 0.58;
+                value[14] = (float) 0.30;
+                value[17] = (float) 0;
+                value[20] = (float) 0.36;
+                value[23] = (float) 0.60;
+                value[26] = (float) 0.96;
+                value[29] = (float) 0.62;
+                break;
+            case "Pop":
+                value[2] = (float) -0.10;
+                value[5] = (float) 0.25;
+                value[8] = (float) 0.35;
+                value[11] = (float) 0.40;
+                value[14] = (float) 0.25;
+                value[17] = (float) -0.5;
+                value[20] = (float) -0.15;
+                value[23] = (float) -0.15;
+                value[26] = (float) -0.10;
+                value[29] = (float) -0.10;
+                break;
+            default:
+                for (int i = 0; i < 32; i++) {
+                    value[i] = 0;
+                }
+                break;
+
+        }
+        return value;
+    }
+
+    public void setEqualizer(String path) {
+        try {
+            File f = new File(path);
+            String genre;
+            String preset;
+            byte genreNo;
+            float[] eqSetting = new float[32];
+            MP3File mpf = new MP3File(f);
+            String title = new String();
+            ID3v1 id = new ID3v1();
+            id = mpf.getID3v1Tag();
+            genreNo = id.getGenre();
+            if (genreNo != -1) {
+                genre = genreToString(genreNo);
+                preset = matchPreset(genre);
+                eqSetting = getEqualizerValue(preset);
+                Timbre.p.eq.setFrom(eqSetting);
+
+            } else {
+                /*---------------------TO BE UPDATED-----------------------------------*/
+            }
+        } catch (IOException | TagException ex) {
+            Logger.getLogger(TimbrePlayer.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
     public void extract(String p) {
         File f = new File(p);
         File l[] = f.listFiles();
@@ -428,9 +558,5 @@ public class TimbrePlayer {
         }
 
     }
-    
-    public void setEqualizer(String path){
-        
-        
-    }
+
 }
