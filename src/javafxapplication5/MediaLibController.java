@@ -96,6 +96,7 @@ public class MediaLibController implements Initializable {
                     Statement st;
                     Connection conn;
                     String ste;
+                    
                     try {
                         conn = DriverManager.getConnection("jdbc:derby://localhost:1527/TimbreDB", "root", "root");
                         st = conn.createStatement();

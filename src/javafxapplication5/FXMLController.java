@@ -73,7 +73,9 @@ public class FXMLController implements Initializable {
     private ImageView play;
     @FXML
     private Label volValue;    
-
+    @FXML 
+    private ImageView playpause;
+    
     //TimbrePlayer P = new TimbrePlayer();
     //Boolean PlayOrPause = false;
     Stage stage;
@@ -138,9 +140,16 @@ public class FXMLController implements Initializable {
     @FXML
     public void onPlayPressed(Event e) {
         if (Timbre.p.control == false) {
+             File maz = new File("src/javafxapplication5/icons/play.png");
+        Image image = new Image(maz.toURI().toString());
+        playpause.setImage(image);
             Timbre.p.resume();
             Timbre.p.control = true;
-        } else {
+            } else {
+             File maz = new File("src/javafxapplication5/icons/pause.png");
+        Image image = new Image(maz.toURI().toString());
+        playpause.setImage(image); 
+           
             Timbre.p.pause();
             Timbre.p.control = false;
         }

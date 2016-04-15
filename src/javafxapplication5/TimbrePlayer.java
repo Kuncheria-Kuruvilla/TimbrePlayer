@@ -472,7 +472,203 @@ public class TimbrePlayer {
                 value[26] = (float) 0.96;
                 value[29] = (float) 0.62;
                 break;
-            case "Pop":
+                case "Full Bass":
+                value[2] = (float) 0.70;
+                value[5] = (float) 0.70;
+                value[8] = (float) 0.70;
+                value[11] = (float) 0.40;
+                value[14] = (float) 0.20;
+                value[17] = (float) -0.45;
+                value[20] = (float) -0.50;
+                value[23] = (float) -0.55;
+                value[26] = (float) -0.55;
+                value[29] = (float) -0.55;
+                break;
+                
+                case "Full Treble":
+                value[2] = (float) -0.50;
+                value[5] = (float) -0.50;
+                value[8] = (float) -0.50;
+                value[11] = (float) -0.25;
+                value[14] = (float) 0.15;
+                value[17] = (float) 0.55;
+                value[20] = (float) 0.80;
+                value[23] = (float) 0.80;
+                value[26] = (float) 0.80;
+                value[29] = (float) 0.85;
+                break;
+                
+               case "Full Bass + Treble":
+                value[2] = (float) 0.35;
+                value[5] = (float) 0.30;
+                value[8] = (float) 0.00;
+                value[11] = (float) -0.40;
+                value[14] = (float) -0.25;
+                value[17] = (float) 0.10;
+                value[20] = (float) 0.45;
+                value[23] = (float) 0.55;
+                value[26] = (float) 0.60;
+                value[29] = (float) 0.60;
+                break;
+                
+                case "HipHop":
+                value[2] = (float) 0.88;
+                value[5] = (float) 1.00;
+                value[8] = (float) 1.00;
+                value[11] = (float) -0.23;
+                value[14] = (float) -0.27;
+                value[17] = (float) 0.12;
+                value[20] = (float) 1.00;
+                value[23] = (float) 0.00;
+                value[26] = (float) 0.50;
+                value[29] = (float) 0.73;
+                break;
+                
+                case "Kuduro":
+                value[2] = (float) 0.65;
+                value[5] = (float) 1.00;
+                value[8] = (float) 0.15;
+                value[11] = (float) 0.62;
+                value[14] = (float) -0.38;
+                value[17] = (float) 0.88;
+                value[20] = (float) 1.00;
+                value[23] = (float) -0.46;
+                value[26] = (float) 0.23;
+                value[29] = (float) -1.00;
+                break;
+                
+                case "Large Hall":
+                value[2] = (float) 0.50;
+                value[5] = (float) 0.50;
+                value[8] = (float) 0.30;
+                value[11] = (float) 0.30;
+                value[14] = (float) 0.00;
+                value[17] = (float) -0.25;
+                value[20] = (float) -0.25;
+                value[23] = (float) -0.25;
+                value[26] = (float) 0.00;
+                value[29] = (float) 0.00;
+                break;
+                
+                case "Live":
+                value[2] = (float) -0.25;
+                value[5] = (float) 0.00;
+                value[8] = (float) 0.20;
+                value[11] = (float) 0.25;
+                value[14] = (float) 0.30;
+                value[17] = (float) 0.30;
+                value[20] = (float) 0.20;
+                value[23] = (float) 0.15;
+                value[26] = (float) 0.15;
+                value[29] = (float) 0.10;
+                break;
+                
+                case "Party":
+                value[2] = (float) 0.35;
+                value[5] = (float) 0.35;
+                value[8] = (float) 0.00;
+                value[11] = (float) 0.00;
+                value[14] = (float) 0.00;
+                value[17] = (float) 0.00;
+                value[20] = (float) 0.00;
+                value[23] = (float) 0.00;
+                value[26] = (float) 0.35;
+                value[29] = (float) 0.35;
+                break;
+                
+                case "Psychedelic":
+                value[2] = (float) 1.00;
+                value[5] = (float) 1.00;
+                value[8] = (float) 0.00;
+                value[11] = (float) 0.40;
+                value[14] = (float) 0.00;
+                value[17] = (float) 0.67;
+                value[20] = (float) 0.79;
+                value[23] = (float) 0.30;
+                value[26] = (float) -1.00;
+                value[29] = (float) 0.37;
+                break;
+                
+                 case "Reggae":
+                value[2] = (float) 0.00;
+                value[5] = (float) 0.00;
+                value[8] = (float) -0.05;
+                value[11] = (float) -0.30;
+                value[14] = (float) 0.00;
+                value[17] = (float) -0.35;
+                value[20] = (float) -0.35;
+                value[23] = (float) 0.00;
+                value[26] = (float) 0.00;
+                value[29] = (float) 0.00;
+                break;
+                
+                 case "Rock":
+                value[2] = (float) 0.40;
+                value[5] = (float) 0.25;
+                value[8] = (float) -0.30;
+                value[11] = (float) -0.40;
+                value[14] = (float) -0.20;
+                value[17] = (float) 0.20;
+                value[20] = (float) 0.45;
+                value[23] = (float) 0.55;
+                value[26] = (float) 0.55;
+                value[29] = (float) 0.55;
+                break;
+                
+                
+                case "Soft":
+                value[2] = (float) 0.25;
+                value[5] = (float) 0.10;
+                value[8] = (float) -0.05;
+                value[11] = (float) -0.15;
+                value[14] = (float) -0.05;
+                value[17] = (float) 0.20;
+                value[20] = (float) 0.45;
+                value[23] = (float) 0.50;
+                value[26] = (float) 0.55;
+                value[29] = (float) 0.65;
+                break;
+                
+                case "Ska":
+                value[2] = (float) -0.15;
+                value[5] = (float) -0.25;
+                value[8] = (float) -0.25;
+                value[11] = (float) -0.05;
+                value[14] = (float) 0.20;
+                value[17] = (float) 0.30;
+                value[20] = (float) 0.45;
+                value[23] = (float) 0.50;
+                value[26] = (float) 0.55;
+                value[29] = (float) 0.50;
+                break;
+                
+                case "Techno":
+                value[2] = (float) 0.40;
+                value[5] = (float) 0.30;
+                value[8] = (float) 0.00;
+                value[11] = (float) -0.30;
+                value[14] = (float) -0.25;
+                value[17] = (float) 0.00;
+                value[20] = (float) 0.40;
+                value[23] = (float) 0.50;
+                value[26] = (float) 0.50;
+                value[29] = (float) 0.45;
+                break;
+                
+                case "Soft Rock":
+                value[2] = (float) 0.20;
+                value[5] = (float) 0.20;
+                value[8] = (float) 0.10;
+                value[11] = (float) -0.05;
+                value[14] = (float) -0.25;
+                value[17] = (float) -0.30;
+                value[20] = (float) -0.20;
+                value[23] = (float) -0.05;
+                value[26] = (float) 0.15;
+                value[29] = (float) 0.45;
+                break;
+                
+                case "Pop":
                 value[2] = (float) -0.10;
                 value[5] = (float) 0.25;
                 value[8] = (float) 0.35;
@@ -484,6 +680,7 @@ public class TimbrePlayer {
                 value[26] = (float) -0.10;
                 value[29] = (float) -0.10;
                 break;
+                
             default:
                 for (int i = 0; i < 32; i++) {
                     value[i] = 0;

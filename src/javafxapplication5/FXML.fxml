@@ -33,7 +33,7 @@
                   <Image url="@../../../../mini%20project/UI%20DESIGN/Fullsize.png" />
                </image>
             </ImageView>
-            <ImageView id="playpause" fitHeight="42.0" fitWidth="34.0" layoutX="105.0" layoutY="569.0" onMouseClicked="#onPlayPressed" preserveRatio="true">
+            <ImageView id="playpause" fx:id="playpause" fitHeight="42.0" fitWidth="34.0" layoutX="105.0" layoutY="569.0" onMouseClicked="#onPlayPressed" preserveRatio="true">
                <image>
                   <Image url="@icons/play.png" />
                </image>
